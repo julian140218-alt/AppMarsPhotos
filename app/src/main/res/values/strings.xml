@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MarsPhotosApp</string>
+    <string name="app_name">Mars Photos</string>
+    <string name="loading_failed">Error al cargar las fotos</string>
+    <string name="retry">Reintentar</string>
+    <string name="mars_photo">Foto de Marte</string>
+    <string name="loading">Cargando</string>
 </resources>
