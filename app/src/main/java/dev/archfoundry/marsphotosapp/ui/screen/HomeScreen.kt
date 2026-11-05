@@ -1,7 +1,6 @@
 package dev.archfoundry.marsphotosapp.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
@@ -10,21 +9,40 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun HomeScreen(marsUiState: String, modifier: Modifier = Modifier) {
+fun HomeScreen(marsUiState: MarsUiState, modifier: Modifier = Modifier) {
+    when (marsUiState) {
+        is MarsUiState.Loading -> LoadingScreen(modifier)
+        is MarsUiState.Success -> ResultScreen(marsUiState.photos, modifier)
+        is MarsUiState.Error -> ErrorScreen(modifier)
+    }
+}
+
+@Composable
+fun LoadingScreen(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ResultScreen(marsUiState)
+        Text(text = "Cargando...")
     }
-
 }
 
 @Composable
-fun ResultScreen(text: String) {
+fun ErrorScreen(modifier: Modifier = Modifier) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(text = "Error de conexión")
+    }
+}
+
+@Composable
+fun ResultScreen(text: String, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
